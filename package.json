@@ -1,0 +1,25 @@
+{
+  "name": "preexam",
+  "version": "1.0.0",
+  "description": "Node.js REst Apis with Express, SEquelize PostgreSQL",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "nodejs, express, sequelize, postgresql, rest, api"
+  },
+  "keywords": [
+    "rolandocuma"
+  ],
+  "author": "rolandocuma",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "pg": "^8.12.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.3"
+  }
+}
