@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Libro = sequelize.define("libro", {
+    const Libro = sequelize.define("Libros", {
         id_libro: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
@@ -12,12 +12,12 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         isbn: {
-            type: Sequelize.STRING
+            type: Sequelize.INTEGER
         },
         editorial: {
             type: Sequelize.STRING
         },
-        anio_publicacion: {
+        anio_publicacion:{
             type: Sequelize.INTEGER
         },
         categoria: {
@@ -29,6 +29,7 @@ module.exports = (sequelize, Sequelize) => {
         ubicacion: {
             type: Sequelize.STRING
         }
+
     });
     return Libro;
 };

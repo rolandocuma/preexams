@@ -16,29 +16,30 @@ exports.create = (req, res) => {
 
         Libro.create(libro).then(result => {
             res.status(200).json({
-                message: "Libro creado con éxito, ID = " + result.id_libro,
+                message: "libro creado exitosamente con id = " + result.id_libro,
                 libro: result,
             });
         });
     } catch (error) {
         res.status(500).json({
-            message: "Error al crear el libro",
+            message: "¡Fallo al crear el libro!",
             error: error.message
         });
     }
 };
 
-exports.retrieveAllLibros = (req, res) => {
-    Libro.findAll()
-        .then(libros => {
+exports.retrieveAllEmpleados = (req, res) => {
+    Empleado.findAll()
+        .then(empleadoInfos => {
             res.status(200).json({
-                message: "Libros obtenidos con éxito",
-                libros: libros
+                message: "¡Empleados obtenidos exitosamente!",
+                empleados: empleadoInfos
             });
         })
         .catch(error => {
+            console.log(error);
             res.status(500).json({
-                message: "Error al obtener los libros",
+                message: "¡Error al obtener los empleados!",
                 error: error
             });
         });
@@ -49,13 +50,14 @@ exports.getLibroById = (req, res) => {
     Libro.findByPk(libroId)
         .then(libro => {
             res.status(200).json({
-                message: "Libro obtenido con ID = " + libroId,
+                message: "libro obtenido exitosamente con id = " + libroId,
                 libro: libro
             });
         })
         .catch(error => {
+            console.log(error);
             res.status(500).json({
-                message: "Error al obtener el libro",
+                message: "¡Error al obtener libro con id!",
                 error: error
             });
         });
@@ -65,41 +67,41 @@ exports.updateById = async (req, res) => {
     try {
         let libroId = req.params.id;
         let libro = await Libro.findByPk(libroId);
-
+    
         if (!libro) {
             res.status(404).json({
-                message: "No se encontró el libro para actualizar con ID = " + libroId,
+                message: "No se encontró el libro para actualizar con id = " + libroId,
+                libro: "",
                 error: "404"
             });
-        } else {
+        } else {    
             let updatedObject = {
                 titulo: req.body.titulo,
                 autor: req.body.autor,
-                isbn: req.body.isbn,
+                isbn: req.body.isbn,  
                 editorial: req.body.editorial,
                 anio_publicacion: req.body.anio_publicacion,
                 categoria: req.body.categoria,
                 cantidad_disponible: req.body.cantidad_disponible,
                 ubicacion: req.body.ubicacion
-            };
-
-            let result = await Libro.update(updatedObject, { returning: true, where: { id_libro: libroId } });
-
+            }
+            let result = await Libro.update(updatedObject, {returning: true, where: {id_libro: libroId}});
+            
             if (!result) {
                 res.status(500).json({
-                    message: "No se pudo actualizar el libro con ID = " + req.params.id,
-                    error: "Error en la actualización"
+                    message: "No se puede actualizar un libro con id = " + req.params.id,
+                    error: "No se pudo actualizar el libro",
                 });
-            } else {
-                res.status(200).json({
-                    message: "Libro actualizado con éxito, ID = " + libroId,
-                    libro: updatedObject,
-                });
-            }
+            };
+
+            res.status(200).json({
+                message: "Actualización exitosa de un libro con id = " + libroId,
+                libro: updatedObject,
+            });
         }
     } catch (error) {
         res.status(500).json({
-            message: "Error al actualizar el libro con ID = " + req.params.id,
+            message: "No se puede actualizar un libro con id = " + req.params.id,
             error: error.message
         });
     }
@@ -112,20 +114,20 @@ exports.deleteById = async (req, res) => {
 
         if (!libro) {
             res.status(404).json({
-                message: "No se encontró el libro con ID = " + libroId,
-                error: "404"
+                message: "No existe el libro con id = " + libroId,
+                error: "404",
             });
         } else {
             await libro.destroy();
             res.status(200).json({
-                message: "Libro eliminado con éxito, ID = " + libroId,
-                libro: libro
+                message: "Eliminación exitosa del libro con id = " + libroId,
+                libro: libro,
             });
         }
     } catch (error) {
         res.status(500).json({
-            message: "Error al eliminar el libro con ID = " + req.params.id,
-            error: error.message
+            message: "No se puede eliminar un libro con id = " + req.params.id,
+            error: error.message,
         });
     }
-};
+}
