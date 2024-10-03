@@ -18,13 +18,13 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         anio_publicacion: {
-            type: Sequelize.STRING
+            type: Sequelize.INTEGER
         },
         categoria: {
             type: Sequelize.STRING
         },
         cantidad_disponible: {
-            type: Sequelize.STRING
+            type: Sequelize.INTEGER
         },
         ubicacion: {
             type: Sequelize.STRING
